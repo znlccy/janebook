@@ -40,4 +40,9 @@ class ArticleController extends Controller
     public function delete() {
 
     }
+
+    /* 文章搜索逻辑 */
+    public function search() {
+
+    }
 }
