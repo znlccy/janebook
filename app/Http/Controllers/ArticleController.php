@@ -86,10 +86,12 @@ class ArticleController extends Controller
         return asset('storage/'.$path);
     }
 
+    /* 文章点赞逻辑 */
     public function zan() {
 
     }
 
+    /* 文章取消赞逻辑 */
     public function unzan() {
 
     }

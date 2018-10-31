@@ -30,8 +30,8 @@
             <input type="text" name="email" id="email" class="form-control" placeholder="邮箱" required autofocus>
             <label for="password" class="sr-only">密码</label>
             <input type="password" name="password" id="password" class="form-control" placeholder="请输入密码" required>
-            <label for="confirmPassword" class="sr-only">确认密码</label>
-            <input type="password" name="confirmPassword" class="form-control" placeholder="请输入确认密码" required>
+            <label class="sr-only">确认密码</label>
+            <input type="password" name="password_confirmation" class="form-control" placeholder="请输入确认密码" required>
 
             @include("layout.error")
             <button class="btn btn-primary btn-block" type="submit">注册</button>
