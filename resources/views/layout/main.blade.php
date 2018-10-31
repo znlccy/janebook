@@ -10,6 +10,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>简书文章</title>
 
+    {{-- Website Icon --}}
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    
     {{-- Bootstrap core CSS --}}
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
 

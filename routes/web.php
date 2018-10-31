@@ -42,14 +42,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/* 用户模块 */
-
 /* 注册界面 */
-Route::get('/user/register', 'App\Http\Controllers\RegisterController@index');
+Route::get('/user/register', 'RegisterController@register');
 
 /* 注册行为 */
-Route::post('/user/register', 'App\Http\Controllers\RegisterController@register');
+Route::post('/user/register', 'RegisterController@registerHandle');
 
 /* 登录界面 */
-Route::get('/user/login', '');
+Route::get('/user/login', 'LoginController@login');
 
+/* 登录行为 */
+Route::post('/user/login', 'LoginController@loginHandle');
+
+/* 登出行为 */
+Route::get('/user/logout', 'LoginController@logout');
+
+/* 个人设置页面 */
+Route::get('/user/setting', 'UserController@setting');
+
+/* 个人设置逻辑 */
+Route::post('/user/setting', 'UserController@settingHandle');
