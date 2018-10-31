@@ -38,3 +38,18 @@ Route::get('/article/{article}/delete', '\App\Http\Controllers\ArticleController
 /* 富文本图片上传 */
 Route::post('/article/image/upload', '\App\Http\Controllers\ArticleController@imageUpload');
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
+/* 用户模块 */
+
+/* 注册界面 */
+Route::get('/user/register', 'App\Http\Controllers\RegisterController@index');
+
+/* 注册行为 */
+Route::post('/user/register', 'App\Http\Controllers\RegisterController@register');
+
+/* 登录界面 */
+Route::get('/user/login', '');
+
