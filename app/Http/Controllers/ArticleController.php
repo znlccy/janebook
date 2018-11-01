@@ -4,18 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Article;
+use App\Comment;
+use App\Zan;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
     //文章列表页面
     public function index() {
-        $articles = Article::orderBy('created_at', 'desc')->paginate(6);
+        $articles = Article::orderBy('created_at', 'desc')->withCount(['comments', 'zans'])->paginate(6);
         return view('article/index',compact('articles'));
     }
 
     /* 文章详情页面 */
     public function show(Article $article) {
 
+        $article->load('comments');
         return view('article/show',compact("article"));
     }
 
@@ -40,7 +44,11 @@ class ArticleController extends Controller
             'content'   => 'required|string|min:10'
         ]);
 
-        $article = Article::create(request(['title', 'content']));
+        /* 逻辑 */
+        $params = array_merge(request(['title', 'content']), ['user_id' => \Auth::id()]);
+        Article::create($params);
+
+        /* 渲染 */
         return redirect('/article');
     }
 
@@ -59,6 +67,8 @@ class ArticleController extends Controller
             'content'   => 'required|string|min:10'
         ]);
 
+        $this->authorize('update', $article);
+
         /* 逻辑 */
         $article->title = request('title');
         $article->content = request('content');
@@ -71,6 +81,7 @@ class ArticleController extends Controller
     /* 文章删除逻辑 */
     public function delete(Article $article) {
         /* 用户权限验证 */
+        $this->authorize('delete', $article);
         $article->delete();
         return redirect('/article');
     }
@@ -87,12 +98,36 @@ class ArticleController extends Controller
     }
 
     /* 文章点赞逻辑 */
-    public function zan() {
+    public function zan(Article $article) {
+        $param = [
+            'user_id'   => Auth::id(),
+            'article_id'=> $article->id,
+        ];
 
+        Zan::firstOrCreate($param);
+        return back();
     }
 
     /* 文章取消赞逻辑 */
-    public function unzan() {
+    public function unzan(Article $article) {
+        $article->zan(\Auth::id())->delete();
+        return back();
+    }
 
+    public function comment(Article $article) {
+
+        /* 验证 */
+        $this->validate(request(), [
+            'content'       => 'min:3'
+        ]);
+
+        /* 逻辑 */
+        $comment = new Comment();
+        $comment->user_id = Auth::id();
+        $comment->content = request('content');
+        $article->comments()->save($comment);
+
+        /* 渲染 */
+        return back();
     }
 }

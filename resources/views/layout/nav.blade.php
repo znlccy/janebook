@@ -23,10 +23,10 @@
                 <li class="dropdown">
                     <div>
                         <img src="/images/favicon.icon" alt="" class="img-rounded" style="border-radius:500px; height: 30px">
-                        <a href="#" class="blog-nav-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">znlccy <span class="caret"></span></a>
+                        <a href="#" class="blog-nav-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{\Auth::user()->name}}<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/user/1">我的主页</a></li>
-                            <li><a href="/user/1/setting">个人设置</a></li>
+                            <li><a href="/user/{{ \Auth::user()->id }}">我的主页</a></li>
+                            <li><a href="/user/{{ \Auth::user()->id }}/setting">个人设置</a></li>
                             <li><a href="/user/logout">登出</a></li>
                         </ul>
                     </div>

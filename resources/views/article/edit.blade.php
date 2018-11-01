@@ -1,7 +1,7 @@
 @extends("layout.main")
 
 @section("content")
-    <div class="col-sm-8 blog-main">
+    <div class="col-sm-8 col-md-8 blog-main">
         <form action="/article/{{$article->id}}" method="POST">
             {{ method_field('PUT') }}
             {{ csrf_field() }}

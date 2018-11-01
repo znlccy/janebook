@@ -30,8 +30,13 @@
         </div>
 
         <div class="row">
-            @yield("content")
-            @include("layout.sidebar")
+
+                @yield("content")
+
+            <div class="col-xs-12 col-md-4 col-sm-4">
+                @include("layout.sidebar")
+            </div>
+
         </div>
     </div>
     @include("layout.footer")

@@ -35,6 +35,15 @@ Route::put('/article/{article}', '\App\Http\Controllers\ArticleController@update
 /* 删除文章页 */
 Route::get('/article/{article}/delete', '\App\Http\Controllers\ArticleController@delete');
 
+/* 文章评论逻辑 */
+Route::post('/article/{article}/comment', '\App\Http\Controllers\ArticleController@comment');
+
+/* 文章赞 */
+Route::get('/article/{article}/zan', '\App\Http\Controllers\ArticleController@zan');
+
+/* 文章取消赞 */
+Route::get('/article/{article}/unzan', '\App\Http\Controllers\ArticleController@unzan');
+
 /* 富文本图片上传 */
 Route::post('/article/image/upload', '\App\Http\Controllers\ArticleController@imageUpload');
 
@@ -62,3 +71,5 @@ Route::get('/user/setting', 'UserController@setting');
 
 /* 个人设置逻辑 */
 Route::post('/user/setting', 'UserController@settingHandle');
+
+
